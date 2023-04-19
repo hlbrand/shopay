@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 const Ad = () => {
   return (
     <Link href="/browse">
-      <div className={styles.ad}>asdf</div>
+      <div className={styles.ad}></div>
     </Link>
   );
 };

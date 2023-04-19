@@ -4,6 +4,7 @@ import db from '../../../utils/db';
 import User from '@/models/User';
 import { createActivationToken } from '@/utils/tokens';
 import { validateEmail } from '@/utils/validation';
+import sendActivationEmail from '@/utils/sendEmails';
 
 const handler = nc();
 
@@ -40,11 +41,15 @@ handler.post(async (req, res) => {
       id: addedUser._id.toString(),
     });
 
-    console.log(activation_token);
+    const url = `${process.env.BASE_URL}/activate/${activation_token}`;
+
+    sendActivationEmail(email, url);
+    await db.disconnectDb();
 
     res.status(200).json({
-      message: 'Successfully signed up',
+      message: 'Successfully signed up. Please active your email',
       activation_token,
+      url,
     });
   } catch (error) {
     if (error.name === 'ValidationError') {
