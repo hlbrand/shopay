@@ -1,6 +1,5 @@
 import nc from 'next-connect';
-import bcrypt from 'bcrypt';
-import db from '../../../utils/db';
+import db from '@/utils/db';
 import User from '@/models/User';
 import { createResetToken } from '@/utils/tokens';
 import { resetEmail } from '@/utils/sendEmails';
