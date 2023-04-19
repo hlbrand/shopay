@@ -2,7 +2,9 @@ import CircledIconBtn from '@/components/buttons/circledIconBtn';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import LoginInput from '@/components/inputs/loginInput';
+import DotLoaderSpinner from '@/components/loaders/dotLoader';
 import styles from '@/styles/forgot.module.scss';
+import axios from 'axios';
 import { Form, Formik } from 'formik';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -21,10 +23,26 @@ export default function forgot() {
       )
       .email('Enter a valid email address.'),
   });
-  const forgotHandler = async () => {};
+  const forgotHandler = async () => {
+    try {
+      setLoading(true);
+      const { data } = await axios.post('/api/auth/forgot', {
+        email,
+      });
+      setSuccess(data.message);
+      setError('');
+      setLoading(false);
+      setEmail('');
+    } catch (error) {
+      setLoading(false);
+      setSuccess('');
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <>
+      {loading && <DotLoaderSpinner loading={loading} />}
       <Header country="" />
       <div className={styles.forgot}>
         <div className="">
@@ -56,8 +74,11 @@ export default function forgot() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <CircledIconBtn type="submit" text="Sign in" />
-                {error && <span className={styles.error}>{error}</span>}
+                <CircledIconBtn type="submit" text="Send link" />
+                <div style={{ marginTop: '10px' }}>
+                  {error && <span className={styles.error}>{error}</span>}
+                  {success && <span className={styles.success}>{success}</span>}
+                </div>
               </Form>
             )}
           </Formik>

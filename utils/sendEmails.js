@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
   },
 });
 
-async function sendActivationEmail(userEmail, activationLink) {
+export async function sendActivationEmail(userEmail, activationLink) {
   try {
     let info = await transporter.sendMail({
       from: '"Shopay App" <your-email@gmail.com>', // sender address
@@ -32,4 +32,18 @@ async function sendActivationEmail(userEmail, activationLink) {
   }
 }
 
-export default sendActivationEmail;
+export async function resetEmail(userEmail, resetLink) {
+  try {
+    let info = await transporter.sendMail({
+      from: '"Shopay App" <your-email@gmail.com>', // sender address
+      to: userEmail, // list of receivers
+      subject: 'Reset Your Shopay Password', // Subject line
+      html: `
+        <a href="${resetLink}">${resetLink}</a>
+      `, // HTML content
+    });
+    console.log('Message sent: %s', info.messageId);
+  } catch (error) {
+    console.log(error);
+  }
+}
