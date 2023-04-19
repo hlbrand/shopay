@@ -6,14 +6,15 @@ import DotLoaderSpinner from '@/components/loaders/dotLoader';
 import styles from '@/styles/forgot.module.scss';
 import axios from 'axios';
 import { Form, Formik } from 'formik';
-import { signIn } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { BiLeftArrowAlt } from 'react-icons/bi';
 import * as Yup from 'yup';
+import jwt from 'jsonwebtoken';
 
-export default function reset({ token }) {
-  console.log('token', token);
+export default function reset({ user_id }) {
+  console.log('user_id', user_id);
   const [password, setPassword] = useState('');
   const [conf_password, setConf_password] = useState('');
   const [error, setError] = useState('');
@@ -31,8 +32,18 @@ export default function reset({ token }) {
   const resetHandler = async () => {
     try {
       setLoading(true);
-      setError('');
-      setLoading(false);
+      const { data } = await axios.put('/api/auth/reset', {
+        user_id,
+        password,
+      });
+      let options = {
+        redirect: false,
+        email: data.email,
+        password: password,
+      };
+      await signIn('credentials', options);
+
+      window.location.reload(true);
     } catch (error) {
       setLoading(false);
       setSuccess('');
@@ -85,7 +96,6 @@ export default function reset({ token }) {
                 <CircledIconBtn type="submit" text="Submit" />
                 <div style={{ marginTop: '10px' }}>
                   {error && <span className={styles.error}>{error}</span>}
-                  {success && <span className={styles.success}>{success}</span>}
                 </div>
               </Form>
             )}
@@ -97,13 +107,22 @@ export default function reset({ token }) {
   );
 }
 
-// export async function getServerSideProps(context) {
-//   const { query } = context;
-//   const token = query.token;
+export async function getServerSideProps(context) {
+  const { query, req } = context;
+  const session = await getSession({ req });
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+  const token = query.token;
+  const user_id = jwt.verify(token, process.env.RESET_TOKEN_SECRET);
 
-//   return {
-//     props: {
-//       token,
-//     },
-//   };
-// }
+  return {
+    props: {
+      user_id: user_id.id,
+    },
+  };
+}
