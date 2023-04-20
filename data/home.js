@@ -146,3 +146,10 @@ export const menuArray = [
     images: [],
   },
 ];
+
+export const userSwiperArray = [
+  {
+    image: '',
+    link: '',
+  },
+];
