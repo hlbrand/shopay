@@ -149,7 +149,18 @@ export const menuArray = [
 
 export const userSwiperArray = [
   {
-    image: '',
+    image:
+      'https://ae01.alicdn.com/kf/S7966eac3eecb43f3bd6dc24e1d16e5e6X/LIGE-2023-New-Smart-Watch-Men-Full-Touch-Screen-Sport-Fitness-Watch-IP67-Waterproof-Bluetooth-For.jpg_Q90.jpg_.webp',
+    link: '',
+  },
+  {
+    image:
+      'https://ae01.alicdn.com/kf/H27c529f5f42f4ec19fef6c18a36a9924z/Full-Touch-Sport-Smart-Watch-Men-Women-Heart-Rate-Fitness-Tracker-Bluetooth-call-Smartwatch-wristwatch-GTS.jpg_Q90.jpg_.webp',
+    link: '',
+  },
+  {
+    image:
+      'https://ae01.alicdn.com/kf/Sd5592cbaef214443b4695f47c9cdc1daP/T68-Plus-Men-Women-Smart-Watch-Body-Temperature-Measure-Sports-Fitness-Watch-Heart-Rate-Blood-Pressure.jpg_Q90.jpg_.webp',
     link: '',
   },
 ];

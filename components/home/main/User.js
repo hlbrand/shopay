@@ -23,7 +23,11 @@ export default function User() {
 
   return (
     <div className={styles.user}>
-      <img src="../../../images/userHeader.jpg" alt="" />
+      <img
+        src="../../../images/userHeader.jpg"
+        alt=""
+        className={styles.user__header}
+      />
       <div className={styles.user__container}>
         {session ? (
           <div className={styles.user__infos}>
@@ -42,7 +46,7 @@ export default function User() {
             </div>
           </div>
         )}
-        <ul className={styles.user__links}>
+        <ul className={styles.user__links} style={{ marginTop: '7rem' }}>
           <li>
             <Link href="/profile" legacyBehavior>
               <a>
@@ -76,10 +80,14 @@ export default function User() {
           <Swiper
             effect={'cards'}
             grabCursor={true}
-            Navigation={true}
+            navigation={true}
             modules={[EffectCards, Navigation]}
-            className="userMenu__swiper"
-            styles={{ maxWidth: '180px', height: '240px', marginTop: '1rem' }}
+            className="user__swiper"
+            style={{
+              maxWidth: '180px ',
+              height: '240px',
+              marginTop: '1rem',
+            }}
           >
             {userSwiperArray.map((item) => (
               <SwiperSlide>
@@ -91,6 +99,11 @@ export default function User() {
           </Swiper>
         </div>
       </div>
+      <img
+        src="../../../images/userHeader.jpg"
+        alt=""
+        className={styles.user__footer}
+      />
     </div>
   );
 }
