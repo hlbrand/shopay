@@ -169,22 +169,30 @@ export const flashDealsArray = [
   {
     image:
       "https://ae01.alicdn.com/kf/Se683e73a9d254a089ba1095064713893s/Lace-Up-Dresses-For-Women-Pregnant-Dresses-Solid-Maternity-V-neck-Short-Sleeve-Beautiful-Clothes-Pregnancy.jpg_Q90.jpg_.webp",
-    discount: "27",
-    sold: "119",
+    price: 40,
+    discount: 27,
+    sold: 119,
+    link: "",
   },
   {
     image: "",
-    discount: "10",
-    sold: "6",
+    price: 40,
+    discount: 10,
+    sold: 6,
+    link: "",
   },
   {
     image: "",
-    discount: "3",
-    sold: "120",
+    price: 40,
+    discount: 3,
+    sold: 120,
+    link: "",
   },
   {
     image: "",
-    discount: "5",
-    sold: "70",
+    price: 40,
+    discount: 5,
+    sold: 70,
+    link: "",
   },
 ];
