@@ -222,6 +222,12 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   .swiper-button-prev {
     top: 35%;
   }
+  @media (max-width: 450px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: grid !important;
+    }
+  }
 }
 
 // ----------Swipers-----
